@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { gameType } from '../model/gametype.enum';
+import { SharedService } from '../services/shared.service';
 @Component({
   selector: 'app-tttboard',
   templateUrl: './tttboard.component.html',
@@ -11,11 +12,15 @@ export class TttboardComponent implements OnInit {
   square!: any[];
   xMove!: boolean;
   winner!: string;
+  gametape!: gameType;
 
-  constructor() {};
+  constructor(private sharedService: SharedService) {};
   
   ngOnInit(): void {
-    this.startNewGame();
+    this.sharedService.getGameTypeEvent().subscribe((gameType: gameType) => {
+      this.gametape = gameType
+      this.startNewGame()
+    })
   }
 
   startNewGame(){
@@ -29,14 +34,27 @@ export class TttboardComponent implements OnInit {
   }
 
   makeMove(posid: number) {
-    if(!this.square[posid]){
-        this.square.splice(posid, 1, this.player);
-        if(this.checkForWIn()){
-          this.startNewGame();
-        };
-        this.xMove = !this.xMove;
-    }
+    switch(this.gametape){
+      case gameType.sameHost:
+        if(!this.square[posid]){
+          this.square.splice(posid, 1, this.player);
+          if(this.checkForWIn()){
+            this.startNewGame();
+            return
+          };
+          this.xMove = !this.xMove;
+        }
+        break
+      case gameType.online:
+        break
+      case gameType.vsAI:
+        break
+      default:
+        return
+    }    
   }
+
+
   checkForWIn(): boolean {
     // poziome
     for (let i = 0; i < 9; i += 3){
