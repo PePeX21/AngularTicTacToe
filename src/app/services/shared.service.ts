@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { gameType } from '../model/gametype.enum';
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class SharedService {
   private subject = new Subject<any>();
 

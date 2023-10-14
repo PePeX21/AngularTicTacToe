@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
-import { TypeService } from '../model/gametype.module';
+import { GameTypeService } from '../model/gametype.service';
 import { SharedService } from '../services/shared.service';
 import { ChoosepanelComponent } from './choosepanel.component';
-import { SharedModule } from '../services/shared.module';
 
 @NgModule({
-  imports: [SharedModule],
+  imports: [],
   declarations: [ChoosepanelComponent],
-  providers: [TypeService, SharedService],
+  providers: [GameTypeService, SharedService],
   exports: [ChoosepanelComponent]
 })
 export class ChoosepanelModule { }

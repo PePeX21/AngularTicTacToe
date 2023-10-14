@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { gameType } from '../model/gametype.enum';
-import { TypeService } from '../model/gametype.module'; // to jest typeService
+import { GameTypeService } from '../model/gametype.service'; 
 import { SharedService } from '../services/shared.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { SharedService } from '../services/shared.service';
 })
 export class ChoosepanelComponent {
   
-  constructor(public type: TypeService, private sharedService: SharedService) {}
+  constructor(public type: GameTypeService, private sharedService: SharedService) {}
 
   startNew(gametype: gameType): void{
     this.sharedService.sendGameTypeEvent(gametype);

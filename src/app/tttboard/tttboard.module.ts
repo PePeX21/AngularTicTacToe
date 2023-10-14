@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core'
-import { TypeService } from '../model/gametype.module';
+import { GameTypeService } from '../model/gametype.service';
 import { SharedService } from '../services/shared.service';
 import { TttboardComponent } from './tttboard.component';
-import { SquareComponent } from '../square/square.component';
+import { SquareModule } from '../square/square.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-    imports: [],
-    declarations: [TttboardComponent, SquareComponent],
-    providers: [TypeService, SharedService],
+    imports: [SquareModule, CommonModule],
+    declarations: [TttboardComponent],
+    providers: [GameTypeService, SharedService],
     exports: [TttboardComponent]
   })
   export class TttboardModule{};

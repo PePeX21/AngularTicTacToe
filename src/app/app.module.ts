@@ -1,14 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TttboardComponent } from './tttboard/tttboard.component';
-import { SquareComponent } from './square/square.component';
-import { ChoosepanelComponent } from './choosepanel/choosepanel.component';
-import { TttboardModule } from './tttboard/tttboard.module';
-import { ChoosepanelModule } from './choosepanel/choosepanel.module';
 import { RouterModule } from '@angular/router';
+import { GamePanelComponent } from './gamepanel/gamepanel.component';
+import { GamePanelModule } from './gamepanel/gamepanel.module';
 
 @NgModule({
   declarations: [
@@ -16,9 +12,9 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    GamePanelModule,
     RouterModule.forRoot([
-      {path:"tictactoe", component:TttboardComponent},
+      {path:"tictactoe", component:GamePanelComponent},
       {path:"**", redirectTo:"/tictactoe"}
     ])
   ],
