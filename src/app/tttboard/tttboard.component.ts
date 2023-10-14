@@ -19,6 +19,7 @@ export class TttboardComponent implements OnInit {
   ngOnInit(): void {
     this.startNewGame();
     this.sharedService.getGameTypeEvent().subscribe((gameType: gameType) => {
+      console.log(gameType.toString());
       this.gametape = gameType
       this.startNewGame()
     })
@@ -35,8 +36,10 @@ export class TttboardComponent implements OnInit {
   }
 
   makeMove(posid: number) {
+    console.log("im in")
     switch(this.gametape){
       case gameType.sameHost:
+        console.log("sameHost working on make move")
         if(!this.square[posid]){
           this.square.splice(posid, 1, this.player);
           if(this.checkForWIn()){
