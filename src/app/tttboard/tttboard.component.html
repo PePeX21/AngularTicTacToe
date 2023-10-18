@@ -4,9 +4,18 @@
 <table>
     <tr *ngFor="let col of columns">
         <td *ngFor="let row of rows">
-            <app-square [value] = "square[row + (col * 3)]"
-                        (click) = "makeMove(row + (col*3))">
+            <app-square [chuj] = "square[row + (col * 3)]"
+                        (click) = "makeMove(row + (col * 3))">
             </app-square>
+        </td>
+    </tr>
+</table>
+<br>
+<br>
+<table>
+    <tr *ngFor="let col of columns">
+        <td *ngFor="let row of rows">
+            <button class="button-1" (click)="makeMove(row + (col * 3))"> {{ square[row + (col * 3)] }} essa </button>
         </td>
     </tr>
 </table>

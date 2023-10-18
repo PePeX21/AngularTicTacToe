@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { GamePanelComponent } from './gamepanel/gamepanel.component';
-import { GamePanelModule } from './gamepanel/gamepanel.module';
+import { LoginPanelComponent } from './loginpanel/loginpanel.component';
+import { LoginPanelModule } from './loginpanel/loginpanel.module';
 
 @NgModule({
   declarations: [
@@ -12,9 +12,9 @@ import { GamePanelModule } from './gamepanel/gamepanel.module';
   ],
   imports: [
     BrowserModule,
-    GamePanelModule,
+    LoginPanelModule,
     RouterModule.forRoot([
-      {path:"tictactoe", component:GamePanelComponent},
+      {path:"tictactoe", component:LoginPanelComponent},
       {path:"**", redirectTo:"/tictactoe"}
     ])
   ],
