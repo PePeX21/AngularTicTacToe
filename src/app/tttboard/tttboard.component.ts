@@ -17,7 +17,7 @@ export class TttboardComponent implements OnInit {
   constructor(private sharedService: SharedService) {};
   
   ngOnInit(): void {
-    // this.startNewGame();  NIe potrzebne ale potrzebne --do wyswietlenia by zobaczyc
+   this.startNewGame(); 
     this.sharedService.getGameTypeEvent().subscribe((gameType: gameType) => {
       console.log(gameType.toString());
       this.gametype = gameType

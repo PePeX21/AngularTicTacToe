@@ -5,10 +5,12 @@ import { FormsModule } from '@angular/forms';
 //import { SharedService } from "../services/shared.service";
 //import { GameTypeService } from "../model/gametype.service";
 import { LoginPanelComponent } from "./loginpanel.component";
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
     //imports: [TttboardModule, ChoosepanelModule],
-    imports: [FormsModule],
+    imports: [FormsModule, HttpClientModule],
     declarations: [LoginPanelComponent],
     //providers: [SharedService, GameTypeService],
     exports: [LoginPanelComponent]
