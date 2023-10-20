@@ -1,0 +1,10 @@
+.button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;      /* Center vertically */
+  }
+  
+  .button-container button {
+    margin: 5px;  /* Add some spacing between buttons */
+  }

@@ -1,12 +1,12 @@
-<h1>User on move is {{ player }}</h1>
 
 <button (click)="startNewGame()">Start New Game</button>
 <table>
     <tr *ngFor="let col of columns">
         <td *ngFor="let row of rows">
             <app-square [value] = "square[row + (col * 3)]"
-                        (click) = "makeMove(row + (col*3))">
+                        (click) = "makeMove(row + (col * 3))">
             </app-square>
         </td>
     </tr>
 </table>
+
