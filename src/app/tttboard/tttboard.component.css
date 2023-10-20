@@ -1,0 +1,49 @@
+/* CSS for the container */
+.container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* CSS for the heading */
+  h1 {
+    font-size: 30px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 20px;
+    color: #2e3132;
+  }
+  
+  /* CSS for the start button */
+  .start-button {
+    background-color: #62929E;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 28px;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .start-button:hover {
+    background-color:  #6fa5b3;
+  }
+  
+  /* CSS for the game board */
+  .game-board {
+    margin: 0 auto; /* Center the game board horizontally */
+  }
+  
+  /* CSS for the game buttons */
+  .game-button {
+    padding: 30px;
+    font-size: 18px;
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+    border-radius: 20px;
+  }
+  
+  
+  

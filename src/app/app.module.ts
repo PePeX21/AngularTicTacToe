@@ -4,12 +4,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { LoginPanelComponent } from './loginpanel/loginpanel.component';
 import { LoginPanelModule } from './loginpanel/loginpanel.module';
 import { GamePanelComponent } from './gamepanel/gamepanel.component';
 import { GamePanelModule } from './gamepanel/gamepanel.module';
 import { CommonModule } from '@angular/common';
+
+const routes: Routes = [
+  {path:"login", component:LoginPanelComponent},
+  {path:"tictactoe", component:GamePanelComponent},
+  {path:"**", redirectTo:"/login"}
+]
 
 @NgModule({
   declarations: [
@@ -22,11 +28,7 @@ import { CommonModule } from '@angular/common';
     BrowserModule,
     GamePanelModule,
     LoginPanelModule,
-    RouterModule.forRoot([
-      {path:"tictactoe", component:GamePanelComponent},
-      {path:"login", component:LoginPanelComponent},
-      {path:"**", redirectTo:"/login"}
-    ])
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]

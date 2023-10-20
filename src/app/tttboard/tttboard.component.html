@@ -1,4 +1,27 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Title</title>
+  <link rel="stylesheet" href="tttboard.component.css" >
+</head>
+<body>
+  <div class="container">
+    <h1>User on the move is {{ player }}</h1>
+
+    <table class="game-board">
+      <tr *ngFor="let col of columns">
+        <td *ngFor="let row of rows">
+          <button class="game-button" (click)="makeMove(row + (col * 3))">{{ square[row + (col * 3)] }}</button>
+
+        </td>
+      </tr>
+    </table>
+    <button class="start-button" (click)="startNewGame()">Restart</button>
+
+  </div>
+</body>
+<!--
 <button (click)="startNewGame()">Start New Game</button>
 <table>
     <tr *ngFor="let col of columns">
@@ -9,4 +32,8 @@
         </td>
     </tr>
 </table>
+-->
+
+</html>
+
 
