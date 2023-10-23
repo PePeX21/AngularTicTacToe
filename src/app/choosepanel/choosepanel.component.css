@@ -1,10 +1,18 @@
-.button-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;  /* Center horizontally */
-    align-items: center;      /* Center vertically */
-  }
-  
-  .button-container button {
-    margin: 5px;  /* Add some spacing between buttons */
-  }
+/* CSS for the menu buttons */
+.menu-button {
+  background-color:  #62929E;
+  color: #FFFFFF;
+  border: none;
+  padding: 12px 16px;
+  font-size: 18px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: background-color 0.3s ease-in-out;
+  margin-right: 10px; /* Add spacing between menu items */
+}
+
+.menu-button:hover {
+  background-color:  #6fa5b3;
+}
+

@@ -1,5 +1,11 @@
-<div class="button-container">
-    <button (click)="startNew(type.gameType.sameHost)">play 1 vs 1 on same host</button>
-    <button (click)="startNew(type.gameType.vsAI)">play against AI</button>
-    <button (click)="startNew(type.gameType.online)">play 1 vs 1 online</button>
-</div>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"> </head>
+    <body>
+        <div class="horizontal-menu">
+        <button class="menu-button VS" (click)="startNew(type.gameType.sameHost)">1 vs 1 on same host</button>
+        <button class="menu-button AI" (click)="startNew(type.gameType.vsAI)">Play against AI</button>
+        <button class="menu-button online" (click)="startNew(type.gameType.online)">1 vs 1 online</button>
+        </div>
+    </body>
