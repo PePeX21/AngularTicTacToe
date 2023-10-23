@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { gameType } from '../model/gametype.enum';
 import { SharedService } from '../services/shared.service';
+import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-tttboard',
   templateUrl: './tttboard.component.html',
@@ -14,14 +16,22 @@ export class TttboardComponent implements OnInit {
   winner!: string;
   gametype!: gameType;
 
-  constructor(private sharedService: SharedService) {};
+  constructor(private sharedService: SharedService, private http: HttpClient, private toastr: ToastrService) {};
   
   ngOnInit(): void {
    this.startNewGame(); 
-    this.sharedService.getGameTypeEvent().subscribe((gameType: gameType) => {
+    this.sharedService.getGameTypeEvent().subscribe((gType: gameType) => {
       console.log(gameType.toString());
-      this.gametype = gameType
+      this.gametype = gType
       this.startNewGame()
+      if(this.gametype == gameType.online){
+        this.http.post<any>('http://localhost:5252/api/game/getOponent', {}, { withCredentials: true }).subscribe(
+          (error) => {
+            this.toastr.error('Error LOGING user :<:', error)
+            console.error('Error logining user:', error);
+          }
+        )
+      }
     })
   }
 
@@ -50,6 +60,7 @@ export class TttboardComponent implements OnInit {
         }
         break
       case gameType.online:
+        
         break
       case gameType.vsAI:
         break
