@@ -3,6 +3,7 @@ import { gameType } from '../model/gametype.enum';
 import { SharedService } from '../services/shared.service';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { WebSocketService } from '../services/websocket.service';
 @Component({
   selector: 'app-tttboard',
   templateUrl: './tttboard.component.html',
@@ -15,8 +16,17 @@ export class TttboardComponent implements OnInit {
   xMove!: boolean;
   winner!: string;
   gametype!: gameType;
-
-  constructor(private sharedService: SharedService, private http: HttpClient, private toastr: ToastrService) {};
+  name!: string;
+  constructor(private sharedService: SharedService, private http: HttpClient, private toastr: ToastrService, private socketService: WebSocketService) {
+    this.socketService.announcement$.subscribe(announcement => {
+      if (announcement) {
+        //this.messages.unshift(announcement);
+      }
+    });
+    this.socketService.name$.subscribe(n => {
+      this.name = "";
+    });
+  };
   
   ngOnInit(): void {
    this.startNewGame(); 
@@ -25,12 +35,15 @@ export class TttboardComponent implements OnInit {
       this.gametype = gType
       this.startNewGame()
       if(this.gametype == gameType.online){
-        this.http.post<any>('http://localhost:5252/api/game/getOponent', {}, { withCredentials: true }).subscribe(
-          (error) => {
-            this.toastr.error('Error LOGING user :<:', error)
-            console.error('Error logining user:', error);
-          }
-        )
+        console.log("startwebSocket")
+        this.socketService.startSocket();
+
+        // this.http.post<any>('wss://localhost:5252/wsCreateRoom', {}, { withCredentials: true }).subscribe(
+        //   (error) => {
+        //     this.toastr.error('Error LOGING user :<:', error)
+        //     console.error('Error logining user:', error);
+        //   }
+        // )
       }
     })
   }
