@@ -10,6 +10,8 @@ import { WebSocketService } from '../services/websocket.service';
   styleUrls: ['./tttboard.component.css']
 })
 export class TttboardComponent implements OnInit {
+  X: string = "X";
+  O: string = "O";
   columns = [0,1,2];
   rows = [0,1,2];
   square!: any[];
@@ -17,15 +19,10 @@ export class TttboardComponent implements OnInit {
   winner!: string;
   gametype!: gameType;
   name!: string;
+  whoAmI!: string; // only for multiplayer
+
   constructor(private sharedService: SharedService, private http: HttpClient, private toastr: ToastrService, private socketService: WebSocketService) {
-    this.socketService.announcement$.subscribe(announcement => {
-      if (announcement) {
-        //this.messages.unshift(announcement);
-      }
-    });
-    this.socketService.name$.subscribe(n => {
-      this.name = "";
-    });
+
   };
   
   ngOnInit(): void {
@@ -34,16 +31,24 @@ export class TttboardComponent implements OnInit {
       console.log(gameType.toString());
       this.gametype = gType
       this.startNewGame()
+
       if(this.gametype == gameType.online){
+
+        this.socketService.move$.subscribe(move => {
+          this.square.splice(parseInt(move), 1, this.player);
+          this.xMove = !this.xMove;
+          if(this.checkForWIn()){
+           
+            this.closeMultiPlayerGame()
+          }
+
+        });
+        this.socketService.playerType$.subscribe(playerType => {
+          playerType == "X" ? this.whoAmI = this.X : this.whoAmI = this.O;
+        });
         console.log("startwebSocket")
         this.socketService.startSocket();
-
-        // this.http.post<any>('wss://localhost:5252/wsCreateRoom', {}, { withCredentials: true }).subscribe(
-        //   (error) => {
-        //     this.toastr.error('Error LOGING user :<:', error)
-        //     console.error('Error logining user:', error);
-        //   }
-        // )
+        
       }
     })
   }
@@ -55,7 +60,7 @@ export class TttboardComponent implements OnInit {
   }
   
   get player(){
-    return this.xMove ? 'X' : 'O';
+    return this.xMove ? this.X : this.O;
   }
 
   makeMove(posid: number) {
@@ -73,6 +78,20 @@ export class TttboardComponent implements OnInit {
         }
         break
       case gameType.online:
+        if(this.player == this.whoAmI){
+          // sobie wpisac
+          if(!this.square[posid]){
+            this.square.splice(posid, 1, this.player);
+            if(this.checkForWIn()){
+              this.closeMultiPlayerGame();
+              return
+            };
+            this.xMove = !this.xMove;
+          }
+          this.socketService.makeMove(posid)
+        }
+
+        
         
         break
       case gameType.vsAI:
@@ -82,6 +101,18 @@ export class TttboardComponent implements OnInit {
     }    
   }
 
+  closeMultiPlayerGame(){
+    this.gametype = gameType.none;
+    this.startNewGame();
+    this.socketService.closeSocket();
+
+    if(this.player != this.whoAmI){
+      this.toastr.info("You have lost, what a looser, get new game");
+    }
+    else{
+      this.toastr.info("You have won genius, get new game");
+    }
+  }
 
   checkForWIn(): boolean {
     // poziome
